@@ -1,0 +1,64 @@
+# list_files gọi trực tiếp trên workspace của stage-02-skills (chỉ dùng đường dẫn giả, không nhắm vào file bí mật)
+
+>>> [thư mục hợp lệ] list_files('data/policies')
+{
+  "ok": true,
+  "path": "data/policies",
+  "entries": [
+    {
+      "name": "policy-before-oct.md",
+      "path": "data/policies/policy-before-oct.md",
+      "type": "file"
+    },
+    {
+      "name": "policy-from-oct.md",
+      "path": "data/policies/policy-from-oct.md",
+      "type": "file"
+    }
+  ]
+}
+
+>>> [đường dẫn là file] list_files('data/policies/policy-before-oct.md')
+{
+  "ok": false,
+  "error": {
+    "code": "NOT_A_DIRECTORY",
+    "message": "Đây là file, không phải thư mục: data/policies/policy-before-oct.md"
+  }
+}
+
+>>> [không tồn tại] list_files('data/khong-ton-tai')
+{
+  "ok": false,
+  "error": {
+    "code": "DIRECTORY_NOT_FOUND",
+    "message": "Không tìm thấy thư mục: data/khong-ton-tai"
+  }
+}
+
+>>> [vượt workspace bằng ..] list_files('../')
+{
+  "ok": false,
+  "error": {
+    "code": "PATH_OUTSIDE_WORKSPACE",
+    "message": "Đường dẫn thoát ra ngoài workspace: ../"
+  }
+}
+
+>>> [vượt workspace bằng .. lồng] list_files('data/../../fixtures')
+{
+  "ok": false,
+  "error": {
+    "code": "PATH_OUTSIDE_WORKSPACE",
+    "message": "Đường dẫn thoát ra ngoài workspace: data/../../fixtures"
+  }
+}
+
+>>> [đường dẫn tuyệt đối] list_files('C:/fake-outside-dir')
+{
+  "ok": false,
+  "error": {
+    "code": "PATH_OUTSIDE_WORKSPACE",
+    "message": "Không chấp nhận đường dẫn tuyệt đối: C:/fake-outside-dir. Dùng đường dẫn tương đối workspace."
+  }
+}

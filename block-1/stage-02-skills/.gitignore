@@ -1,0 +1,5 @@
+.venv/
+.env
+__pycache__/
+.pytest_cache/
+# traces/ và workspace/output/ được commit để nộp bài (bằng chứng trace + báo cáo agent tạo)

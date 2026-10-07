@@ -1,0 +1,13 @@
+$ python check_csv.py --input workspace/data/khong-ton-tai.csv --max-hours 8
+ERROR: Không đọc được file workspace/data/khong-ton-tai.csv: No such file or directory
+exit_code=1
+
+$ python check_csv.py --input workspace/data/workload.csv   (thiếu --max-hours)
+usage: check_csv.py [-h] --input INPUT --max-hours MAX_HOURS
+check_csv.py: error: the following arguments are required: --max-hours
+exit_code=2
+
+$ python check_csv.py --input workspace/data/workload.csv --max-hours -1
+usage: check_csv.py [-h] --input INPUT --max-hours MAX_HOURS
+check_csv.py: error: argument --max-hours: '-1' không phải số hữu hạn không âm.
+exit_code=2
